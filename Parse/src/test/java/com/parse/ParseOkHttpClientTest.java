@@ -16,7 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.ByteArrayInputStream;
@@ -45,8 +45,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 23)
 public class ParseOkHttpClientTest {
 
   private MockWebServer server = new MockWebServer();
@@ -82,6 +82,7 @@ public class ParseOkHttpClientTest {
         .build();
     okHttpRequest = parseClient.getRequest(parseRequest);
     assertEquals(ParseHttpRequest.Method.DELETE.toString(), okHttpRequest.method());
+    assertEquals(null, okHttpRequest.body());
 
     // Put
     parseRequest = builder
